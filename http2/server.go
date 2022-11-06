@@ -45,7 +45,7 @@ import (
 	"sync"
 	"time"
 
-	tls "github.com/saucesteals/utls"
+	tls "github.com/refraction-networking/utls"
 
 	http "github.com/saucesteals/fhttp"
 	"github.com/saucesteals/fhttp/http2/hpack"
@@ -2516,8 +2516,9 @@ func (rws *responseWriterState) writeChunk(p []byte) (n int, err error) {
 // prior to the headers being written. If the set of trailers is fixed
 // or known before the header is written, the normal Go trailers mechanism
 // is preferred:
-//    https://golang.org/pkg/net/http/#ResponseWriter
-//    https://golang.org/pkg/net/http/#example_ResponseWriter_trailers
+//
+//	https://golang.org/pkg/net/http/#ResponseWriter
+//	https://golang.org/pkg/net/http/#example_ResponseWriter_trailers
 const TrailerPrefix = "Trailer:"
 
 // promoteUndeclaredTrailers permits http.Handlers to set trailers

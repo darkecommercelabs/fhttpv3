@@ -4,8 +4,7 @@ go 1.16
 
 require (
 	github.com/andybalholm/brotli v1.0.4
-	github.com/saucesteals/utls v1.1.2-0.20220526033452-2e6d7376b70a
-	golang.org/x/crypto v0.0.0-20220518034528-6f7dac969898 // indirect
-	golang.org/x/net v0.0.0-20211112202133-69e39bad7dc2
-	golang.org/x/term v0.0.0-20210615171337-6886f2dfbf5b
+	github.com/refraction-networking/utls v1.1.6-0.20221101174805-9c1996abbbba
+	golang.org/x/net v0.1.0
+	golang.org/x/term v0.1.0
 )

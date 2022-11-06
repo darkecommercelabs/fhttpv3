@@ -27,7 +27,7 @@ import (
 	"sync/atomic"
 	"time"
 
-	tls "github.com/saucesteals/utls"
+	tls "github.com/refraction-networking/utls"
 
 	http "github.com/saucesteals/fhttp"
 	"github.com/saucesteals/fhttp/httptrace"
