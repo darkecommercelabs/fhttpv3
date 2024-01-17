@@ -148,6 +148,7 @@ type Transport struct {
 	InitialWindowSize uint32 // if 0, will use global initialWindowSize
 	HeaderTableSize   uint32 // if 0, will use global initialHeaderTableSize
 	TransportConnFlow uint32 // if 0, will use global transportDefaultConnFlow
+	HeaderPriority    *PriorityParam
 }
 
 func (t *Transport) maxHeaderListSize() uint32 {
@@ -1295,6 +1296,14 @@ func (cc *ClientConn) awaitOpenSlotForRequest(req *http.Request) error {
 
 // requires cc.wmu be held
 func (cc *ClientConn) writeHeaders(streamID uint32, endStream bool, maxFrameSize int, hdrs []byte) error {
+	headerPriority := cc.t.HeaderPriority
+	if headerPriority == nil {
+		headerPriority = &PriorityParam{
+			Exclusive: true,
+			Weight:    255,
+		}
+	}
+
 	first := true // first frame written (HEADERS is first, then CONTINUATION)
 	for len(hdrs) > 0 && cc.werr == nil {
 		chunk := hdrs
@@ -1309,10 +1318,7 @@ func (cc *ClientConn) writeHeaders(streamID uint32, endStream bool, maxFrameSize
 				BlockFragment: chunk,
 				EndStream:     endStream,
 				EndHeaders:    endHeaders,
-				Priority: PriorityParam{
-					Exclusive: true,
-					Weight:    255,
-				},
+				Priority:      *headerPriority,
 			})
 			first = false
 		} else {
