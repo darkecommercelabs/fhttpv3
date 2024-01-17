@@ -145,8 +145,9 @@ type Transport struct {
 	connPoolOrDef ClientConnPool // non-nil version of ConnPool
 
 	Settings          []Setting
-	InitialWindowSize uint32 // if nil, will use global initialWindowSize
-	HeaderTableSize   uint32 // if nil, will use global initialHeaderTableSize
+	InitialWindowSize uint32 // if 0, will use global initialWindowSize
+	HeaderTableSize   uint32 // if 0, will use global initialHeaderTableSize
+	TransportConnFlow uint32 // if 0, will use global transportDefaultConnFlow
 }
 
 func (t *Transport) maxHeaderListSize() uint32 {
@@ -735,10 +736,15 @@ func (t *Transport) newClientConn(c net.Conn, addr string, singleUse bool) (*Cli
 		cc.tlsState = &state
 	}
 
+	transportConnFlow := t.TransportConnFlow
+	if transportConnFlow == 0 {
+		transportConnFlow = transportDefaultConnFlow
+	}
+
 	cc.bw.Write(clientPreface)
 	cc.fr.WriteSettings(cc.t.Settings...)
-	cc.fr.WriteWindowUpdate(0, transportDefaultConnFlow)
-	cc.inflow.add(transportDefaultConnFlow + initialWindowSize)
+	cc.fr.WriteWindowUpdate(0, transportConnFlow)
+	cc.inflow.add(int32(transportConnFlow + initialWindowSize))
 	cc.bw.Flush()
 	if cc.werr != nil {
 		cc.Close()
@@ -1844,14 +1850,15 @@ func (cc *ClientConn) streamByID(id uint32, andRemove bool) *clientStream {
 
 // clientConnReadLoop is the state owned by the clientConn's frame-reading readLoop.
 type clientConnReadLoop struct {
-	_             incomparable
-	cc            *ClientConn
-	closeWhenIdle bool
+	_                 incomparable
+	cc                *ClientConn
+	closeWhenIdle     bool
+	transportConnFlow uint32
 }
 
 // readLoop runs in its own goroutine and reads and dispatches frames.
 func (cc *ClientConn) readLoop() {
-	rl := &clientConnReadLoop{cc: cc}
+	rl := &clientConnReadLoop{cc: cc, transportConnFlow: cc.t.TransportConnFlow}
 	defer rl.cleanup()
 	cc.readerErr = rl.run()
 	if ce, ok := cc.readerErr.(ConnectionError); ok {
@@ -2165,9 +2172,14 @@ func (rl *clientConnReadLoop) handleResponse(cs *clientStream, f *MetaHeadersFra
 		return res, nil
 	}
 
+	transportConnFlow := rl.transportConnFlow
+	if transportConnFlow == 0 {
+		transportConnFlow = transportDefaultConnFlow
+	}
+
 	cs.bufPipe = pipe{b: &dataBuffer{expected: res.ContentLength}}
 	cs.bytesRemain = res.ContentLength
-	res.Body = transportResponseBody{cs}
+	res.Body = transportResponseBody{cs: cs, transportConnFlow: transportConnFlow}
 	go cs.awaitRequestCancel(cs.req)
 
 	res.Body = http.DecompressBody(res)
@@ -2206,7 +2218,8 @@ func (rl *clientConnReadLoop) processTrailers(cs *clientStream, f *MetaHeadersFr
 // Response.Body. It is an io.ReadCloser. On Read, it reads from cs.body.
 // On Close it sends RST_STREAM if EOF wasn't already seen.
 type transportResponseBody struct {
-	cs *clientStream
+	cs                *clientStream
+	transportConnFlow uint32 // how much conn-level flow control to return
 }
 
 func (b transportResponseBody) Read(p []byte) (n int, err error) {
@@ -2242,10 +2255,15 @@ func (b transportResponseBody) Read(p []byte) (n int, err error) {
 	cc.mu.Lock()
 	defer cc.mu.Unlock()
 
+	transportConnFlow := int32(b.transportConnFlow)
+	if transportConnFlow == 0 {
+		transportConnFlow = transportDefaultConnFlow
+	}
+
 	var connAdd, streamAdd int32
 	// Check the conn-level first, before the stream-level.
-	if v := cc.inflow.available(); v < transportDefaultConnFlow/2 {
-		connAdd = transportDefaultConnFlow - v
+	if v := cc.inflow.available(); v < transportConnFlow/2 {
+		connAdd = transportConnFlow - v
 		cc.inflow.add(connAdd)
 	}
 	if err == nil { // No need to refresh if the stream is over or failed.
