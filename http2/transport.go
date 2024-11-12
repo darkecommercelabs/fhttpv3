@@ -29,10 +29,10 @@ import (
 
 	tls "github.com/refraction-networking/utls"
 
-	http "github.com/saucesteals/fhttp"
-	"github.com/saucesteals/fhttp/httptrace"
+	http "github.com/Daily-Box-Club/fhttp"
+	"github.com/Daily-Box-Club/fhttp/httptrace"
 
-	"github.com/saucesteals/fhttp/http2/hpack"
+	"github.com/Daily-Box-Club/fhttp/http2/hpack"
 	"golang.org/x/net/http/httpguts"
 	"golang.org/x/net/idna"
 )

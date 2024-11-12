@@ -18,7 +18,7 @@ import (
 
 	tls "github.com/refraction-networking/utls"
 
-	"github.com/saucesteals/fhttp/internal"
+	"github.com/Daily-Box-Club/fhttp/internal"
 )
 
 // Issue 15446: incorrect wrapping of errors when server closes an idle connection.

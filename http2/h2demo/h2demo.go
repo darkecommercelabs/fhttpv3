@@ -28,7 +28,7 @@ import (
 	tls "github.com/refraction-networking/utls"
 
 	"cloud.google.com/go/storage"
-	"github.com/saucesteals/fhttp/http2"
+	"github.com/Daily-Box-Club/fhttp/http2"
 	"go4.org/syncutil/singleflight"
 	"golang.org/x/build/autocertcache"
 	"golang.org/x/crypto/acme/autocert"
