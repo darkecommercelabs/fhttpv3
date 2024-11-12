@@ -6,7 +6,10 @@ package http2
 
 import (
 	"errors"
+	"fmt"
 	"io"
+	"log"
+	"runtime/debug"
 	"sync"
 )
 
@@ -71,19 +74,58 @@ var errClosedPipeWrite = errors.New("write on closed buffer")
 // Write copies bytes from p into the buffer and wakes a reader.
 // It is an error to write more data than the buffer can hold.
 func (p *pipe) Write(d []byte) (n int, err error) {
+	// Recover from any potential panics and log the error without crashing
+	defer func() {
+		if r := recover(); r != nil {
+			log.Printf("Recovered from panic in Write: %v", r)
+			debug.PrintStack() // Print stack trace for debugging
+			n, err = 0, fmt.Errorf("recovered from panic: %v", r)
+		}
+	}()
+
+	// Lock the mutex to prevent concurrent writes
 	p.mu.Lock()
 	defer p.mu.Unlock()
+
+	// Check if 'p' is nil
+	if p == nil {
+		log.Println("pipe instance is nil")
+		return 0, fmt.Errorf("pipe instance is nil")
+	}
+
+	// Log details about 'd'
+	if d == nil {
+		log.Println("data slice 'd' is nil")
+		return 0, fmt.Errorf("data slice 'd' is nil")
+	}
+
 	if p.c.L == nil {
+		log.Println("p.c.L is nil, setting to &p.mu")
 		p.c.L = &p.mu
 	}
+
+	// Signal the condition variable after unlocking
 	defer p.c.Signal()
+
+	// Check for write conditions
 	if p.err != nil {
+		log.Println("write error: pipe is closed")
 		return 0, errClosedPipeWrite
 	}
 	if p.breakErr != nil {
+		log.Println("write error: pipe has a break error")
 		p.unread += len(d)
-		return len(d), nil // discard when there is no reader
+		return len(d), nil // discard data when there is no reader
 	}
+
+	// Ensure the buffer 'p.b' is not nil before writing
+	if p.b == nil {
+		log.Println("buffer 'p.b' is nil")
+		return 0, fmt.Errorf("buffer 'p.b' is nil")
+	}
+
+	// Log the actual writing attempt
+	log.Println("Writing to buffer...")
 	return p.b.Write(d)
 }
 
