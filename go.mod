@@ -1,4 +1,4 @@
-module github.com/saucesteals/fhttp
+module github.com/Daily-Box-Club/fhttp
 
 go 1.16
 
