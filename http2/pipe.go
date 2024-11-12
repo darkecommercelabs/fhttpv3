@@ -124,8 +124,6 @@ func (p *pipe) Write(d []byte) (n int, err error) {
 		return 0, fmt.Errorf("buffer 'p.b' is nil")
 	}
 
-	// Log the actual writing attempt
-	log.Println("Writing to buffer...")
 	return p.b.Write(d)
 }
 
