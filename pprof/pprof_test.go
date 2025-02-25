@@ -16,9 +16,9 @@ import (
 	"testing"
 	"time"
 
-	http "github.com/Daily-Box-Club/fhttp"
-	"github.com/Daily-Box-Club/fhttp/httptest"
-	"github.com/Daily-Box-Club/fhttp/internal/profile"
+	http "github.com/darkecommercelabs/fhttpv3"
+	"github.com/darkecommercelabs/fhttpv3/httptest"
+	"github.com/darkecommercelabs/fhttpv3/internal/profile"
 )
 
 // TestDescriptions checks that the profile names under runtime/pprof package

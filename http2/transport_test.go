@@ -33,10 +33,10 @@ import (
 
 	tls "github.com/refraction-networking/utls"
 
-	http "github.com/Daily-Box-Club/fhttp"
-	"github.com/Daily-Box-Club/fhttp/http2/hpack"
-	"github.com/Daily-Box-Club/fhttp/httptest"
-	"github.com/Daily-Box-Club/fhttp/httptrace"
+	http "github.com/darkecommercelabs/fhttpv3"
+	"github.com/darkecommercelabs/fhttpv3/http2/hpack"
+	"github.com/darkecommercelabs/fhttpv3/httptest"
+	"github.com/darkecommercelabs/fhttpv3/httptrace"
 )
 
 var (

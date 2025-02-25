@@ -22,7 +22,7 @@ import (
 	"sync"
 	"testing"
 
-	"github.com/Daily-Box-Club/fhttp/internal/cfg"
+	"github.com/darkecommercelabs/fhttpv3/internal/cfg"
 )
 
 // Builder reports the name of the builder running this test

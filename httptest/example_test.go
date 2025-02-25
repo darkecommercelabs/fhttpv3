@@ -9,8 +9,8 @@ import (
 	"io"
 	"log"
 
-	http "github.com/Daily-Box-Club/fhttp"
-	"github.com/Daily-Box-Club/fhttp/httptest"
+	http "github.com/darkecommercelabs/fhttpv3"
+	"github.com/darkecommercelabs/fhttpv3/httptest"
 )
 
 func ExampleResponseRecorder() {

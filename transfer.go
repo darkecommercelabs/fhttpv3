@@ -18,8 +18,8 @@ import (
 	"sync"
 	"time"
 
-	"github.com/Daily-Box-Club/fhttp/httptrace"
-	"github.com/Daily-Box-Club/fhttp/internal"
+	"github.com/darkecommercelabs/fhttpv3/httptrace"
+	"github.com/darkecommercelabs/fhttpv3/internal"
 
 	"golang.org/x/net/http/httpguts"
 )

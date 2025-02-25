@@ -11,9 +11,9 @@ import (
 	"net/url"
 	"strings"
 
-	http "github.com/Daily-Box-Club/fhttp"
-	"github.com/Daily-Box-Club/fhttp/httptest"
-	"github.com/Daily-Box-Club/fhttp/httputil"
+	http "github.com/darkecommercelabs/fhttpv3"
+	"github.com/darkecommercelabs/fhttpv3/httptest"
+	"github.com/darkecommercelabs/fhttpv3/httputil"
 )
 
 func ExampleDumpRequest() {

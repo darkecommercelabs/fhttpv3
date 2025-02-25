@@ -19,9 +19,9 @@ import (
 	"testing"
 	"time"
 
-	http "github.com/Daily-Box-Club/fhttp"
-	"github.com/Daily-Box-Club/fhttp/httptest"
-	"github.com/Daily-Box-Club/fhttp/internal/testenv"
+	http "github.com/darkecommercelabs/fhttpv3"
+	"github.com/darkecommercelabs/fhttpv3/httptest"
+	"github.com/darkecommercelabs/fhttpv3/internal/testenv"
 )
 
 // This test is a CGI host (testing host.go) that runs its own binary

@@ -9,9 +9,9 @@ import (
 	"log"
 	"net/url"
 
-	http "github.com/Daily-Box-Club/fhttp"
-	"github.com/Daily-Box-Club/fhttp/cookiejar"
-	"github.com/Daily-Box-Club/fhttp/httptest"
+	http "github.com/darkecommercelabs/fhttpv3"
+	"github.com/darkecommercelabs/fhttpv3/cookiejar"
+	"github.com/darkecommercelabs/fhttpv3/httptest"
 )
 
 func ExampleNew() {

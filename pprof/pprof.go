@@ -74,8 +74,8 @@ import (
 	"strings"
 	"time"
 
-	http "github.com/Daily-Box-Club/fhttp"
-	"github.com/Daily-Box-Club/fhttp/internal/profile"
+	http "github.com/darkecommercelabs/fhttpv3"
+	"github.com/darkecommercelabs/fhttpv3/internal/profile"
 )
 
 func init() {

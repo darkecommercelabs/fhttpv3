@@ -17,8 +17,8 @@ import (
 	"sync"
 	"time"
 
-	http "github.com/Daily-Box-Club/fhttp"
-	"github.com/Daily-Box-Club/fhttp/cgi"
+	http "github.com/darkecommercelabs/fhttpv3"
+	"github.com/darkecommercelabs/fhttpv3/cgi"
 )
 
 // request holds the state for an in-progress request. As soon as it's complete,

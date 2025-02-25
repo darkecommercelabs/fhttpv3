@@ -27,8 +27,8 @@ import (
 	"testing"
 	"time"
 
-	. "github.com/Daily-Box-Club/fhttp"
-	"github.com/Daily-Box-Club/fhttp/httptest"
+	. "github.com/darkecommercelabs/fhttpv3"
+	"github.com/darkecommercelabs/fhttpv3/httptest"
 )
 
 const (

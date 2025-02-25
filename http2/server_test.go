@@ -29,8 +29,8 @@ import (
 
 	tls "github.com/refraction-networking/utls"
 
-	http "github.com/Daily-Box-Club/fhttp"
-	"github.com/Daily-Box-Club/fhttp/httptest"
+	http "github.com/darkecommercelabs/fhttpv3"
+	"github.com/darkecommercelabs/fhttpv3/httptest"
 
 	"golang.org/x/net/http2/hpack"
 )

@@ -38,8 +38,8 @@ import (
 
 	tls "github.com/refraction-networking/utls"
 
-	"github.com/Daily-Box-Club/fhttp/http2"
-	"github.com/Daily-Box-Club/fhttp/http2/hpack"
+	"github.com/darkecommercelabs/fhttpv3/http2"
+	"github.com/darkecommercelabs/fhttpv3/http2/hpack"
 	"golang.org/x/term"
 )
 

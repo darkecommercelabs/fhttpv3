@@ -26,7 +26,7 @@ import (
 
 	tls "github.com/refraction-networking/utls"
 
-	"github.com/Daily-Box-Club/fhttp/httptrace"
+	"github.com/darkecommercelabs/fhttpv3/httptrace"
 
 	"golang.org/x/net/idna"
 )

@@ -14,7 +14,7 @@ import (
 	"strings"
 	"sync"
 
-	"github.com/Daily-Box-Club/fhttp/http2/hpack"
+	"github.com/darkecommercelabs/fhttpv3/http2/hpack"
 	"golang.org/x/net/http/httpguts"
 )
 

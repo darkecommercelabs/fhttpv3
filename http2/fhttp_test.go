@@ -13,13 +13,13 @@ import (
 	"strings"
 	"testing"
 
-	"github.com/Daily-Box-Club/fhttp/cookiejar"
-	"github.com/Daily-Box-Club/fhttp/httptest"
+	"github.com/darkecommercelabs/fhttpv3/cookiejar"
+	"github.com/darkecommercelabs/fhttpv3/httptest"
 	tls "github.com/refraction-networking/utls"
 	"golang.org/x/net/publicsuffix"
 
-	http "github.com/Daily-Box-Club/fhttp"
-	"github.com/Daily-Box-Club/fhttp/http2"
+	http "github.com/darkecommercelabs/fhttpv3"
+	"github.com/darkecommercelabs/fhttpv3/http2"
 )
 
 // Tests if connection settings are written correctly

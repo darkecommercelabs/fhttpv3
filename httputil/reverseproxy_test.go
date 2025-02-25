@@ -24,8 +24,8 @@ import (
 	"testing"
 	"time"
 
-	http "github.com/Daily-Box-Club/fhttp"
-	"github.com/Daily-Box-Club/fhttp/httptest"
+	http "github.com/darkecommercelabs/fhttpv3"
+	"github.com/darkecommercelabs/fhttpv3/httptest"
 )
 
 const fakeHopHeader = "X-Fake-Hop-Header-For-Test"

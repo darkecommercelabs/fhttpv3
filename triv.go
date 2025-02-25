@@ -19,7 +19,7 @@ import (
 	"strconv"
 	"sync"
 
-	http "github.com/Daily-Box-Club/fhttp"
+	http "github.com/darkecommercelabs/fhttpv3"
 )
 
 // hello world, the web server

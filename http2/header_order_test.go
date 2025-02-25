@@ -6,8 +6,8 @@ import (
 	"strings"
 	"testing"
 
-	http "github.com/Daily-Box-Club/fhttp"
-	"github.com/Daily-Box-Club/fhttp/httptrace"
+	http "github.com/darkecommercelabs/fhttpv3"
+	"github.com/darkecommercelabs/fhttpv3/httptrace"
 )
 
 func TestHeaderOrder(t *testing.T) {

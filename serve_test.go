@@ -37,11 +37,11 @@ import (
 
 	tls "github.com/refraction-networking/utls"
 
-	. "github.com/Daily-Box-Club/fhttp"
-	"github.com/Daily-Box-Club/fhttp/httptest"
-	"github.com/Daily-Box-Club/fhttp/httputil"
-	"github.com/Daily-Box-Club/fhttp/internal"
-	"github.com/Daily-Box-Club/fhttp/internal/testenv"
+	. "github.com/darkecommercelabs/fhttpv3"
+	"github.com/darkecommercelabs/fhttpv3/httptest"
+	"github.com/darkecommercelabs/fhttpv3/httputil"
+	"github.com/darkecommercelabs/fhttpv3/internal"
+	"github.com/darkecommercelabs/fhttpv3/internal/testenv"
 )
 
 type dummyAddr string
