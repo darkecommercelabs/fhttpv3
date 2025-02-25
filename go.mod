@@ -1,4 +1,4 @@
-module github.com/Daily-Box-Club/fhttp
+module github.com/darkecommercelabs/fhttpv3
 
 go 1.16
 
